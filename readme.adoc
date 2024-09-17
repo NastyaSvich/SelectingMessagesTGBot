@@ -3,6 +3,7 @@
 * xref:description[Описание]
 * xref:prerequisites[Пререквизиты]
 * xref:run[Запуск]
+* xref:check[Проверка работоспособности]
 
 [[description]]
 == Описание
@@ -53,3 +54,8 @@ LISTENING_CHANNEL_ID = -1002004782419
 SEND_CHANNEL_ID = -1001139874413
 SEARCH_WORDS = #Minsk,Cat,Dog
 ----
+
+[[check]]
+== Проверка работоспособности
+
+Для проверки работоспособности бота необходимо вписать команду "/check" в чат указанный для отправки сообщений (SEND_CHANNEL_ID).
