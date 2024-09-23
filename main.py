@@ -9,15 +9,22 @@ API_HASH = os.getenv("API_HASH")
 LISTENING_CHANNEL_ID = os.getenv("LISTENING_CHANNEL_ID")
 SEND_CHANNEL_ID = os.getenv("SEND_CHANNEL_ID")
 SEARCH_WORDS = os.getenv("SEARCH_WORDS")
+ADDITIONAL_TEXT_TO_MESSAGE = os.getenv("ADDITIONAL_TEXT_TO_MESSAGE")
 
 client = TelegramClient('spainbotsecure', int(API_ID), API_HASH)
+
 
 # Ищет конкретные сообщения в чате и переотправляет их в другой чат.
 @client.on(events.NewMessage(chats=[int(LISTENING_CHANNEL_ID)]))
 async def search_new_message(event):
     for word in SEARCH_WORDS.split(","):
         if word in event.raw_text:
-            await client.send_message(int(SEND_CHANNEL_ID), event.raw_text)
+            await client.send_message(
+                int(SEND_CHANNEL_ID),
+                f"{event.raw_text}\n{ADDITIONAL_TEXT_TO_MESSAGE}"
+                if len(ADDITIONAL_TEXT_TO_MESSAGE)
+                else event.raw_text
+            )
 
 
 # Проверка работоспособности.
